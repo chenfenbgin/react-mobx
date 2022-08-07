@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { observer } from "mobx-react-lite";
+import { useStore } from "./store/index";
+const App = () => {
+  // 当然这里直接可以解构
+  // const {counterStore} = useStore();
+  const rootStore = useStore();
+  console.log(rootStore);
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {rootStore.counterStore.count}
+      <button onClick={rootStore.counterStore.addCount}>+</button>
     </div>
   );
-}
+};
 
-export default App;
+// 3.1 包裹App
+export default observer(App);
